@@ -8,3 +8,6 @@ node_modules
 .env.local
 .env*.local
 *.log
+# Incremental tsc state from a local dev build: makes `tsc --build` skip emit
+# inside the image (dist/ is excluded), so the build fails with no dist.
+**/*.tsbuildinfo
