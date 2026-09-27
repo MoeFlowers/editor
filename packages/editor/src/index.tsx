@@ -313,6 +313,12 @@ export {
   SnapTargetIcon,
 } from './components/ui/snap-target-badge'
 export {
+  toggleVideoRecording,
+  VideoRecordButton,
+  VideoRecorderHud,
+  VideoRecorderPanel,
+} from './components/ui/video-recorder/video-recorder'
+export {
   FloorplanCompassButton,
   type FloorplanCompassButtonProps,
 } from './components/viewer/floorplan-compass-button'
@@ -889,6 +895,11 @@ export {
   useStairBuildPreview,
 } from './store/use-stair-build-preview'
 export { useUploadStore } from './store/use-upload'
+export {
+  findViewerCanvas,
+  isVideoRecordingSupported,
+  useVideoRecorder,
+} from './store/use-video-recorder'
 export { useWallMoveGhosts, type WallMoveGhostBridge } from './store/use-wall-move-ghosts'
 export {
   default as useWallSnapIndicator,

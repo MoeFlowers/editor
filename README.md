@@ -41,6 +41,31 @@ and note your edits; no separate permission is needed.
 
 [Download the six original videos and see the creator guide](docs/media/next-demo/README.md).
 
+## Video recording (this fork)
+
+This fork adds an in-editor video recorder. Click the video-camera icon at the right end of
+the viewer toolbar, or press **Ctrl+Alt+R**, and orbit, walk through or edit the building while
+it records. Stopping downloads the take.
+
+- MP4 (H.264) when the browser can record it, otherwise WebM; three quality presets; 24/30/50 fps
+- Optional microphone narration, 3-second countdown, pause/resume
+- **Cinematic orbit**: a smooth turntable around the view target while recording
+- **Clean view**: records in preview mode (no grid, handles or panels)
+
+Only the 3D canvas is recorded — panels and cursor never appear in the video. It uses the
+browser's `MediaRecorder`, so recording is local and nothing is uploaded. Switching views mid-take
+(e.g. toggling preview) ends the take and keeps what was recorded.
+
+Run this fork with Docker (no Node or Bun needed):
+
+```bash
+git clone https://github.com/MoeFlowers/editor.git pascal-editor
+cd pascal-editor
+docker compose up -d --build
+```
+
+Then open http://localhost:3000 in Chrome or Edge (WebGPU is required).
+
 ## Run the Editor Locally
 
 Node.js 22.13 or newer can create a persistent local Pascal installation without

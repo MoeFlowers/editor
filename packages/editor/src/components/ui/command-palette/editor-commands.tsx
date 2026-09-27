@@ -44,6 +44,7 @@ import { createUnitInBuilding, enterUnitFocus, leaveUnitFocus } from '../../../l
 import { useCommandRegistry } from '../../../store/use-command-registry'
 import type { StructureTool } from '../../../store/use-editor'
 import useEditor from '../../../store/use-editor'
+import { useVideoRecorder } from '../../../store/use-video-recorder'
 import { useCommandPalette } from './index'
 
 export function EditorCommands() {
@@ -469,6 +470,26 @@ export function EditorCommands() {
               download: `screenshot_${new Date().toISOString().split('T')[0]}.png`,
             }).click()
           }),
+      },
+      {
+        id: 'editor.export.video.start',
+        label: 'Start Video Recording',
+        group: 'Export & Share',
+        icon: <Video className="h-4 w-4" />,
+        keywords: ['video', 'record', 'recording', 'rec', 'film', 'mp4', 'webm', 'walkthrough'],
+        shortcut: ['Ctrl', 'Alt', 'R'],
+        when: () => useVideoRecorder.getState().status === 'idle',
+        execute: () => run(() => void useVideoRecorder.getState().start()),
+      },
+      {
+        id: 'editor.export.video.stop',
+        label: 'Stop Video Recording',
+        group: 'Export & Share',
+        icon: <Square className="h-4 w-4" />,
+        keywords: ['video', 'record', 'stop', 'save'],
+        shortcut: ['Ctrl', 'Alt', 'R'],
+        when: () => useVideoRecorder.getState().status !== 'idle',
+        execute: () => run(() => useVideoRecorder.getState().stop()),
       },
     ])
   }, [

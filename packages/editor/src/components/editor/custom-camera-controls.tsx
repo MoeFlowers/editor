@@ -43,6 +43,7 @@ import {
   setKeyboardPanKey,
 } from '../../lib/keyboard-pan'
 import { editorOwnsOneFingerDrag } from '../../lib/touch-gesture-priority'
+import { orbitRadiansPerSecond } from '../../lib/video-recorder'
 import { publishCameraPose } from '../../store/camera-pose-store'
 import useEditor from '../../store/use-editor'
 import {
@@ -50,6 +51,7 @@ import {
   useEndpointReshape,
   useMovingNode,
 } from '../../store/use-interaction-scope'
+import { useVideoRecorder } from '../../store/use-video-recorder'
 import { createCameraDraggingLifecycle } from './camera-dragging-lifecycle'
 
 const currentTarget = new Vector3()
@@ -603,6 +605,15 @@ export const CustomCameraControls = ({ paused = false }: { paused?: boolean }) =
   useEffect(() => {
     publishInitialCameraPose(publishCurrentPose)
   }, [publishCurrentPose])
+
+  // Cinematic turntable while a video take is running (store/use-video-recorder).
+  useFrame((_, delta) => {
+    if (isFirstPersonMode || !controls.current) return
+    const { status, orbit } = useVideoRecorder.getState()
+    if (status !== 'recording' || orbit === 'off') return
+    // Clamp so a stalled frame (tab switch) does not jump the camera.
+    void controls.current.rotate(orbitRadiansPerSecond(orbit) * Math.min(delta, 0.1), 0, false)
+  })
 
   useFrame((_, delta) => {
     if (isFirstPersonMode || !controls.current) return

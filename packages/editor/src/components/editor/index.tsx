@@ -80,6 +80,7 @@ import { SettingsPanel, type SettingsPanelProps } from '../ui/sidebar/panels/set
 import { SitePanel, type SitePanelProps } from '../ui/sidebar/panels/site-panel'
 import type { SidebarTab } from '../ui/sidebar/tab-bar'
 import { useHostPanels } from '../ui/sidebar/use-plugin-panels'
+import { VideoRecorderHud } from '../ui/video-recorder/video-recorder'
 import { ViewerStage } from '../viewer/viewer-stage'
 import type { ViewerStageMode } from '../viewer/viewer-stage-modes'
 import { CaptureCameraRig } from './capture-camera-rig'
@@ -1611,6 +1612,7 @@ function EditorContent({
     return (
       <>
         <FloorplanModeCoordinator />
+        <VideoRecorderHud />
         {visibleLoader && (
           <div className="fixed inset-0 z-60">
             {sceneLoadError ? (
@@ -1691,6 +1693,7 @@ function EditorContent({
   return (
     <div className="dark flex h-full w-full gap-3 bg-neutral-100 p-3 text-foreground">
       <FloorplanModeCoordinator />
+      <VideoRecorderHud />
       {visibleLoader && (
         <div className="fixed inset-0 z-60">
           {sceneLoadError ? (

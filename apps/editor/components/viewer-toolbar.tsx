@@ -14,6 +14,7 @@ import {
   useFloorplanAnnotationVisibility,
   useFloorplanMode,
   useSidebarStore,
+  VideoRecordButton,
   type ViewMode,
 } from '@pascal-app/editor'
 import {
@@ -758,6 +759,8 @@ export function CommunityViewerToolbarRight({
           ) : null))
         : null}
       <PreviewButton />
+      <div className="my-1.5 w-px bg-border/50" />
+      <VideoRecordButton />
     </div>
   )
 }
